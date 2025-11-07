@@ -85,8 +85,8 @@ class FileDependencySet implements NativeDependencySet {
 }
 
 def netCommDependencySet = new FileDependencySet(project.files(
-    'src/lib/netcomm/libFRC_NetworkCommunication.so.25.0.0',
-    'src/lib/chipobject/libRoboRIO_FRC_ChipObject.so.25.0.0',
+    'src/lib/netcomm/libFRC_NetworkCommunication.so.26.0.0',
+    'src/lib/chipobject/libRoboRIO_FRC_ChipObject.so.26.0.0',
     'src/lib/visa/libvisa.so.23.3.0'),
     project.files())
 
@@ -171,11 +171,11 @@ build.dependsOn copyAllOutputs
 
 ext.addTaskToCopyAllOutputs = { task ->
     copyAllOutputs.dependsOn task
-    copyAllOutputs.inputs.file task.archivePath
-    copyAllOutputs.from task.archivePath
+    copyAllOutputs.inputs.file task.archiveFile
+    copyAllOutputs.from task.archiveFile
 }
 
-def pubVersion = '2025.2.0'
+def pubVersion = '2026.1.0'
 
 def baseArtifactId = 'chipobject'
 def artifactGroupId = 'edu.wpi.first.ni-libraries'
@@ -217,7 +217,7 @@ copyAllOutputs.from versionFile
 task libZip(type: Zip) {
     destinationDirectory = outputsFolder
     archiveBaseName = zipBaseName
-    classifier = "linuxathena"
+    archiveClassifier = "linuxathena"
 
     from('src/lib/chipobject') {
         into '/linux/athena/shared/'
@@ -227,7 +227,7 @@ task libZip(type: Zip) {
 task libZipDebug(type: Zip) {
     destinationDirectory = outputsFolder
     archiveBaseName = zipBaseName
-    classifier = "linuxathenadebug"
+    archiveClassifier = "linuxathenadebug"
 
     from('src/lib/chipobject') {
         into '/linux/athena/shared/'
@@ -237,7 +237,7 @@ task libZipDebug(type: Zip) {
 task headersZip(type: Zip) {
     destinationDirectory = outputsFolder
     archiveBaseName = zipBaseName
-    classifier = "headers"
+    archiveClassifier = "headers"
 
     from('src/include/FRC_FPGA_ChipObject') {
         into '/FRC_FPGA_ChipObject'
@@ -247,7 +247,7 @@ task headersZip(type: Zip) {
 task visaLib(type: Zip) {
     destinationDirectory = outputsFolder
     archiveBaseName = visaZipBaseName
-    classifier = "linuxathena"
+    archiveClassifier = "linuxathena"
 
     from('src/lib/visa') {
         into '/linux/athena/shared/'
@@ -257,7 +257,7 @@ task visaLib(type: Zip) {
 task visaLibDebug(type: Zip) {
     destinationDirectory = outputsFolder
     archiveBaseName = visaZipBaseName
-    classifier = "linuxathenadebug"
+    archiveClassifier = "linuxathenadebug"
 
     from('src/lib/visa') {
         into '/linux/athena/shared/'
@@ -267,7 +267,7 @@ task visaLibDebug(type: Zip) {
 task visaHeaders(type: Zip) {
     destinationDirectory = outputsFolder
     archiveBaseName = visaZipBaseName
-    classifier = "headers"
+    archiveClassifier = "headers"
 
     from ('src/include/visa') {
         into '/visa'
@@ -277,7 +277,7 @@ task visaHeaders(type: Zip) {
 task netCommLib(type: Zip) {
     destinationDirectory = outputsFolder
     archiveBaseName = netcommZipBaseName
-    classifier = "linuxathena"
+    archiveClassifier = "linuxathena"
 
     from('src/lib/netcomm') {
         into '/linux/athena/shared/'
@@ -287,7 +287,7 @@ task netCommLib(type: Zip) {
 task netCommLibDebug(type: Zip) {
     destinationDirectory = outputsFolder
     archiveBaseName = netcommZipBaseName
-    classifier = "linuxathenadebug"
+    archiveClassifier = "linuxathenadebug"
 
     from('src/lib/netcomm') {
         into '/linux/athena/shared/'
@@ -297,7 +297,7 @@ task netCommLibDebug(type: Zip) {
 task netCommHeaders(type: Zip) {
     destinationDirectory = outputsFolder
     archiveBaseName = netcommZipBaseName
-    classifier = "headers"
+    archiveClassifier = "headers"
 
     from('src/include/FRC_NetworkCommunication') {
         into '/FRC_NetworkCommunication'
@@ -307,19 +307,19 @@ task netCommHeaders(type: Zip) {
 task runtimeLib(type: Zip) {
     destinationDirectory = outputsFolder
     archiveBaseName = runtimeZipBaseName
-    classifier = "linuxathena"
+    archiveClassifier = "linuxathena"
 }
 
 task runtimeLibDebug(type: Zip) {
     destinationDirectory = outputsFolder
     archiveBaseName = runtimeZipBaseName
-    classifier = "linuxathenadebug"
+    archiveClassifier = "linuxathenadebug"
 }
 
 task imageZip(type: Zip) {
     destinationDirectory = outputsFolder
     archiveBaseName = runtimeZipBaseName
-    classifier = "allowedimages"
+    archiveClassifier = "allowedimages"
 
     from('allowed_images.txt')
 }
@@ -429,5 +429,5 @@ task patchNiLibraries() {
 }
 
 wrapper {
-    gradleVersion = '7.5.1'
+    gradleVersion = '8.11.1'
 }

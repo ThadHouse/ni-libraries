@@ -145,6 +145,7 @@ typedef enum
     kResourceType_WPIlib_future7,
     kResourceType_WPIlib_future8,
     kResourceType_Rev_ServoHub,
+    kResourceType_YAMS,
 
 //    kResourceType_MaximumID = 255,
 } tResourceType;
@@ -168,6 +169,7 @@ typedef enum
     kFramework_ROS = 5,
     kFramework_RobotBuilder = 6,
     kFramework_AdvantageKit = 7,
+    kFramework_Everybot = 8,
 
     kRobotDrive_ArcadeStandard = 1,
     kRobotDrive_ArcadeButtonSpin = 2,
